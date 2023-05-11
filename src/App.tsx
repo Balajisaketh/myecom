@@ -1,24 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import Home from './Home';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import Addproduct from './componets/Addproduct';
+import Addproductlayout from './Addproductlayout';
+import Deleteprod from './componets/Deleteprod';
+import Deleteprodlayout from './componets/Deleteprodlayout';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/addproduct" element={<Addproductlayout/>}></Route>
+        <Route path="/deleteproduct" element={<Deleteprodlayout/>}></Route>
+      </Routes>
+      
     </div>
   );
 }

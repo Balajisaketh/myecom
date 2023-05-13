@@ -1,18 +1,9 @@
 import React from 'react'
-import { Button, Label, TextInput ,} from 'flowbite-react'
-function Addproduct() {
+
+function Updateprod() {
   return (
-  <>
-  
-        <div>
-
-  
-<form>
-  <div className="space-y-12">
-  
-    <div className="pb-8">
-   
-
+    <div className='space-y-10'>
+      <h1 className='text-center font-bold text-3xl mx-30'>Update Your Product</h1>
       <div className="mt-10 grid grid-cols-12 gap-y-8 mx-40">
         <div className="col-span-12">
           <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Product Name</label>
@@ -39,15 +30,13 @@ function Addproduct() {
           </div>
         </div>
         </div>
-        <div className= 'bg-blue-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '>
-          <p className='text-center text-xl'>Submit</p>
-        </div>
-      </div>
-  </div>
-</form>
-</div>
-  </>   
+        <div className= 'bg-red-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '>
+          <p className='text-center text-xl'>UPDATE</p>
+           </div>
+
+    </div>
+    
   )
 }
 
-export default Addproduct
+export default Updateprod

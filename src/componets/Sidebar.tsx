@@ -1,7 +1,7 @@
 import { faAngleDown, faRightToBracket, faShoppingCart, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
-import FontAwesome from 'react-fontawesome'
+//import FontAwesome from 'react-fontawesome'
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 function Sidebar() {
@@ -30,6 +30,9 @@ function Sidebar() {
 <div className='px-10' >
 <p className='drop-shadow-md z-20 bg-green-300 py-3 rounded-md'><Link to='/addproduct'>New Products</Link></p>
 </div>
+<div className='px-10' >
+<p className='drop-shadow-md z-20 bg-green-300 py-3 rounded-md'><Link to='/updateproduct'>Update Products</Link></p>
+</div>
 <div className='px-10'>
 <p className='drop-shadow-md z-20 bg-red-300 py-3 rounded-md'><Link to="/deleteproduct">Delete Product</Link></p>
 </div>
@@ -43,7 +46,7 @@ function Sidebar() {
 
       
 <FontAwesomeIcon icon={faUsers} className='mt-1'/>
-<p>Customer</p>
+<p><Link to="/customers">Customer</Link> </p>
 
 
 </div>

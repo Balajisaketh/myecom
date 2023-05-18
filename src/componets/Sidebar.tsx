@@ -54,7 +54,7 @@ function Sidebar() {
 
       
       <FontAwesomeIcon icon={faShoppingCart} className='mt-1'/>
-<p>Orders</p>
+<p><Link to="/orders">Orders</Link> </p>
 </div>
 <div className='flex mx-5 py-10 px-4 relative space-x-4'>
 <FontAwesomeIcon icon={faRightToBracket} className='mt-1'/>

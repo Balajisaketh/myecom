@@ -9,6 +9,7 @@ import Deleteprod from './componets/Deleteprod';
 import Deleteprodlayout from './componets/Deleteprodlayout';
 import Updateprodlayout from './componets/Updateprodlayout';
 import Customerlayout from './componets/CustomerLayout';
+import OrdersLayout from './componets/OrdersLayout';
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Route path="/deleteproduct" element={<Deleteprodlayout/>}></Route>
         <Route path="/updateproduct" element={<Updateprodlayout/>}></Route>
         <Route path ="/customers" element={<Customerlayout />} ></Route>
+        <Route path ="/orders" element={<OrdersLayout />} ></Route>
       </Routes>
       
     </div>

@@ -1,17 +1,24 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { getCustomersList} from '../API Calls/AdminAPICalls';
-import { Link } from 'react-router-dom';
-import { Navigate } from 'react-router-dom'
+import { getCustomersList, getOrdersList} from '../API Calls/AdminAPICalls';
+import { useLocation } from 'react-router-dom';
 
-function Customer() {
-    const [customers, setCustomers] = useState<any[]>([]);
+function Orders() {
+    const location = useLocation();
+    const {state} = location;
+    let custId:any[] = [];
+    const [orderStatus, setOrderStatus] = useState("");
+    if(state.customerId != null){
+    custId = state.customerId
+    }
+    const [orders, setOrders] = useState<any[]>([]);
+    console.log(custId)
     useEffect(() => {
-        getCustomersList(setCustomers);
+        getOrdersList(custId,setOrders, orderStatus);
     });
   return (
     <div className='space-y-10'>
-      <h1 className='text-center font-bold text-3xl mx-30'>Customer Details</h1>
+      <h1 className='text-center font-bold text-3xl mx-30'>Order Details</h1>
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
         
@@ -28,22 +35,22 @@ function Customer() {
             <tr>
                 
                 <th scope="col" className="px-6 py-3">
-                    Name
+                    Product
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Email
+                    Price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Quantity
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Status
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Action
                 </th>
             </tr>
         </thead>
         <tbody>
             {
-                customers.map(data => (
+                orders.map(data => (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
@@ -56,14 +63,11 @@ function Customer() {
                     <div className="font-normal text-gray-500">{data.email}</div>
                     </td>
                     <td className="px-6 py-4">
-                        <Link to={"/orders"} state={{customerId:data.uid}} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                         Get orders
-                         </Link>
+                        <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        >Get orders</div>
                     </td>
-                    
                     <td className="px-6 py-4">
                         <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        
                         >Edit user</div>
                     </td>
                 </tr>
@@ -82,4 +86,4 @@ function Customer() {
 }
 
 
-export default Customer
+export default Orders

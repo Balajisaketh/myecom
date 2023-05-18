@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Label, TextInput ,} from 'flowbite-react'
 import { properties } from '../properties'
 import { useState } from 'react';
-import axios from 'axios';
+import { submitAddProduct } from '../API Calls/AdminAPICalls';
 function Addproduct() {
   const [productName, setProductName]=useState("");
   const [productDescription, setProductDescription]=useState("");
@@ -93,25 +93,7 @@ function Addproduct() {
   )
 }
 
-function submitAddProduct(productName:any,  productDescription:any , productPrice:any ,productQuantity:any, category:any, setIsProductAdded:any){
-  //console.log("submeted");
-  axios.post(properties.baseURL + properties.addProductsURL , {
-    body:{
-      productname:productName,
-      description:productDescription,
-      price:productPrice,
-      quantity:productQuantity,
-      category:category
-    }
-  }).then((res) => {
-    console.log(res)
-    if(res.status==200){
-      setIsProductAdded("true");
-    } else {
-      setIsProductAdded("false");
-    }
-  })
-}
+
 
 function renderSuccessAlert(productName: any, isProductAdded: any, setIsProductAdded:any) {
   if (isProductAdded === "true") {

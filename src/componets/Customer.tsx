@@ -12,7 +12,7 @@ function Customer() {
     const [status,setstatus]=useState({val:"idle"})
     useEffect(() => {
         getCustomersList(setCustomers);
-    });
+    },[]);
    
   // API search results
   const [results, setResults] = useState([]);
@@ -81,7 +81,7 @@ const apicall = ()=>
         console.log(res.data,"i m red data");
            setstatus({val:"done"});
            setResults(res.data.rows);
-           setCustomers(res.data.rows);
+           setCustomers(res.data);
       }).catch((err)=>
       {
         setstatus({val:"error"});
@@ -127,7 +127,7 @@ const apicall = ()=>
         <tbody>
             {
                 
-              customers &&   customers.map((data,index) => (
+                 customers.map((data,index) => (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                     
                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
@@ -158,7 +158,7 @@ const apicall = ()=>
                 <></>
             //     status && status.val==="done" ?
             //    <> */}
-            //    { 
+                { 
             //       results && results.map((data:any,index:any) => (
             //         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                     

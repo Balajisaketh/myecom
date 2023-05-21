@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 function Orders() {
     const location = useLocation();
     const {state} = location;
+    console.log(state)
     let custId:any[] = [];
     const [orderStatus, setOrderStatus] = useState("");
     if(state.customerId != null){

@@ -22,7 +22,7 @@ export function submitAddProduct(productName:any,  productDescription:any , prod
   }
 
   export function getCustomersList (setCustomers:any) {
-    axios.get(properties.baseURL + properties.getCustomerListURL)
+    axios.post(properties.baseURL + properties.getCustomerListURL)
     .then((res) => {
         if(res.status==200){
           console.log(res.data,"i m in get users")

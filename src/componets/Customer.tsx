@@ -70,7 +70,8 @@ function Customer() {
 //   );
 //   return debouncedValue;
 // }
-const apicall = ()=>
+const apicall = (searchval:any)=>
+
 {
     console.log("nter in apic a")
     const body={
@@ -80,6 +81,11 @@ const apicall = ()=>
       {
         console.log(res.data,"i m red data");
            setstatus({val:"done"});
+           const resdata=res.filter((fildata:any)=>
+           {
+                return (searchVal && fildata.username.toLowerCase().includes(searchVal.toLowerCase()));
+           })
+           console.log(resdata,"i m done data");
            setResults(res.data.rows);
            setCustomers(res.data.rows);
       }).catch((err)=>
@@ -87,6 +93,8 @@ const apicall = ()=>
         setstatus({val:"error"});
       })
 }
+
+
   return (
     <div className='space-y-10'>
       <h1 className='text-center font-bold text-3xl mx-30'>Customer Details</h1>
@@ -101,7 +109,7 @@ const apicall = ()=>
             <input type="text" id="table-search-users" className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for Customers" onChange={(e)=>setSearchVal(e.target.value)} onKeyDown={(e)=>{
                 if(e.key==="Enter")
                 {
-                     apicall()
+                     apicall(searchVal)
                 }
             }}/>
         </div>
@@ -125,69 +133,9 @@ const apicall = ()=>
             </tr>
         </thead>
         <tbody>
-            {
-                
-              customers &&   customers.map((data,index) => (
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
-                    
-                    <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <div className="pl-3">
-                            <div className="text-base font-semibold">{data.username}</div>
-                            
-                        </div>  
-                    </th>
-                    <td className="px-6 py-4">
-                    <div className="font-normal text-gray-500">{data.email}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                        <Link to={"/orders"} state={{customerId:data.uid}} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                         Get orders
-                         </Link>
-                    </td>
-                    
-                    <td className="px-6 py-4">
-                        <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        
-                        >Edit user</div>
-                    </td>
-                </tr>
-                ))
-            }
-            
-                {/* </>:
-                <></>
-            //     status && status.val==="done" ?
-            //    <> */}
-            //    { 
-            //       results && results.map((data:any,index:any) => (
-            //         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
-                    
-            //         <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-            //             <div className="pl-3">
-            //                 <div className="text-base font-semibold">{data.username}</div>
-                            
-            //             </div>  
-            //         </th>
-            //         <td className="px-6 py-4">
-            //         <div className="font-normal text-gray-500">{data.email}</div>
-            //         </td>
-            //         <td className="px-6 py-4">
-            //             <Link to={"/orders"} state={{customerId:data.uid}} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-            //              Get orders
-            //              </Link>
-            //         </td>
-                    
-            //         <td className="px-6 py-4">
-            //             <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        
-            //             >Edit user</div>
-            //         </td>
-            //     </tr>
-            //     ))     
-            //    }
-            //    </>:<></>
-                
-}        
+           {
+
+           }
 
                
         </tbody>
@@ -198,7 +146,7 @@ const apicall = ()=>
     </div>
     
   )
-}
 
 
+        }
 export default Customer

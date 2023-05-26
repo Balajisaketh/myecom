@@ -9,14 +9,14 @@ function Orders() {
     console.log(state)
     let custId:any[] = [];
     const [orderStatus, setOrderStatus] = useState("");
-    if(state.customerId != null){
+    if(state != null){
     custId = state.customerId
     }
     const [orders, setOrders] = useState<any[]>([]);
     console.log(custId)
     useEffect(() => {
         getOrdersList(custId,setOrders, orderStatus);
-    });
+    },[]);
   return (
     <div className='space-y-10'>
       <h1 className='text-center font-bold text-3xl mx-30'>Order Details</h1>
@@ -42,10 +42,10 @@ function Orders() {
                     Price
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Quantity
+                    Status
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Status
+                    Full Details
                 </th>
             </tr>
         </thead>
@@ -56,20 +56,19 @@ function Orders() {
                     
                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="pl-3">
-                            <div className="text-base font-semibold">{data.username}</div>
+                            <div className="text-base font-semibold">{data.productname}</div>
                             
                         </div>  
                     </th>
                     <td className="px-6 py-4">
-                    <div className="font-normal text-gray-500">{data.email}</div>
+                    <div className="font-normal text-gray-500">{data.orderamount}</div>
+                    </td>
+                    <td className="px-6 py-4">
+                    <div className="font-normal text-gray-500">{data.orderstatus}</div>
                     </td>
                     <td className="px-6 py-4">
                         <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >Get orders</div>
-                    </td>
-                    <td className="px-6 py-4">
-                        <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >Edit user</div>
+                        >Get full details</div>
                     </td>
                 </tr>
                 ))

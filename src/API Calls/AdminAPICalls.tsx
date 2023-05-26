@@ -34,14 +34,14 @@ export function submitAddProduct(productName:any,  productDescription:any , prod
 export function getOrdersList(custId:any,setOrders:any, orderStatus:any){
   let url = properties.baseURL + properties.getCustomerOrders ;
   if(custId != null)
-    url += custId;
-  if(orderStatus != null)
-    url += orderStatus;
+    url += "/" + custId;
+  if(orderStatus != null && orderStatus.length >0)
+    url += "/" + orderStatus;
 
     axios.get(url)
     .then( (res) => {
       if(res.status==200){
-          
+          setOrders(res.data);
       }
     })
 }

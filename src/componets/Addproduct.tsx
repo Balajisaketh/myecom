@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Label, TextInput ,} from 'flowbite-react'
 import { properties } from '../properties'
 import { useState } from 'react';
 import { submitAddProduct } from '../API Calls/AdminAPICalls';
+import { AwsContext} from '../awsauth';
+import { v4 as uuidv4 } from 'uuid';
+
 function Addproduct() {
   const [productName, setProductName]=useState("");
   const [productDescription, setProductDescription]=useState("");
@@ -10,6 +13,24 @@ function Addproduct() {
   const [productQuantity, setProductQuantity]=useState("");
   const [productCategory, setProductCategory]=useState("");
   const [isProductAdded, setIsProductAdded]=useState("");
+  const [prodimage, setProdimage]=useState<File>();
+  const {uploadtos3}=useContext(AwsContext);
+  const handleFileSelect = (e:any) => {
+    console.log("handle", e.target.files[0].name);
+    setProdimage(e.target.files[0]);
+    sendtos3(e.target.files[0]);
+
+  }
+  const sendtos3=(value:any)=>
+  {
+    const uploadParams = {
+      Bucket: 'vasisbucket',
+      Key: value+uuidv4(),
+      Body: prodimage, // include the file content
+      ACL: 'public-read', // make the uploaded image publicly readable
+    };
+    uploadtos3(uploadParams) 
+  }
   return (
   <>
   
@@ -79,6 +100,11 @@ function Addproduct() {
               setProductCategory(e.target.value)}}
             className="block w-full text-center text-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black"/>
           </div>
+        </div>
+        <div className='flex space-x-2'>
+        <div className='col-span-4'>
+          <input type="file" className="p-3" onChange={(e)=>handleFileSelect(e)}/>    
+        </div>
         </div>
         </div>
         <Button className= 'bg-blue-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '

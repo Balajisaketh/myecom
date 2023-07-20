@@ -1,10 +1,15 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import AWS from 'aws-sdk';
+import { FilePath } from "aws-sdk/clients/transfer";
+import { useDispatch } from "react-redux";
+import { addimageData } from "./redux/alldata";
 export const AwsContext = createContext<any>({});
+
 AWS.config.update({
     accessKeyId: 'AKIAV67O2D4GHUDN4HWC',
     secretAccessKey: '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',
     region: 'ap-south-1',
+    signatureVersion: 'v4',
   });
   
   // Create an S3 instance
@@ -14,7 +19,8 @@ export const AwscontextProvider = ({
   }: {
     children: React.ReactNode;
   }) => {
-    
+const [imgpath,setimgpath] =useState<FilePath>();
+const dispatch=useDispatch();
  const uploadtos3=(data:any)=>
  {
     console.log(data,"i m data")
@@ -23,6 +29,8 @@ export const AwscontextProvider = ({
           console.log('Error uploading file:', err);
         } else {
           console.log('File uploaded successfully:', data.Location);
+             dispatch(addimageData({path:data.Location}));
+
           // Perform any necessary actions with the uploaded file URL
         }
       });
@@ -31,7 +39,8 @@ export const AwscontextProvider = ({
    return(
     <AwsContext.Provider
           value={{
-           uploadtos3
+           uploadtos3,
+           imgpath
           }}
         >
           {children}

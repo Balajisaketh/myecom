@@ -1,25 +1,42 @@
 import axios from "axios";
 import { properties } from "../properties";
+import { useContext } from "react";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { AwsContext } from "../awsauth";
+import { FilePath } from "aws-sdk/clients/ecr";
 
-export function submitAddProduct(productName:any,  productDescription:any , productPrice:any ,productQuantity:any, category:any, setIsProductAdded:any){
-    //console.log("submeted");
-    axios.post(properties.baseURL + properties.addProductsURL , {
-      body:{
-        productname:productName,
-        description:productDescription,
-        price:productPrice,
-        quantity:productQuantity,
-        category:category
-      }
-    }).then((res) => {
-      console.log(res)
-      if(res.status==200){
+
+function SubmitAddProduct(
+  productName: any,
+  productDescription: any,
+  productPrice: any,
+  productQuantity: any,
+  category: any,
+  setIsProductAdded: any,
+  imgpath:String,
+) {
+  const prdbdy={
+    productname: productName,
+    description: productDescription,
+    price: productPrice,
+    quantity: productQuantity,
+    category: category,
+    imgpath: imgpath,
+  }
+
+
+  axios
+    .post(properties.baseURL + properties.addProductsURL, prdbdy)
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
         setIsProductAdded("true");
       } else {
         setIsProductAdded("false");
       }
-    })
-  }
+    });
+}
+export default SubmitAddProduct;
 
   export function getCustomersList (setCustomers:any) {
     axios.get(properties.baseURL + properties.getCustomerListURL)

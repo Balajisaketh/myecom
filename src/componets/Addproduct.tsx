@@ -13,6 +13,7 @@ function Addproduct() {
   const [productDescription, setProductDescription]=useState("");
   const [productPrice, setProductPrice]=useState("");
   const [productQuantity, setProductQuantity]=useState("");
+  const [brand,setbrand]=useState("")
   const [productCategory, setProductCategory]=useState("");
   const [isProductAdded, setIsProductAdded]=useState("");
   const imagePath=useSelector(selectimagepath);
@@ -69,7 +70,7 @@ function Addproduct() {
             <input type="text" name="first-name" id="first-name" autoComplete="given-name" 
             placeholder="Product Name" 
             onChange={ (e) => {
-              //console.log(e.target.value);
+              //console.log(e.target.value);  
               setProductName(e.target.value)}}
             className="block w-full text-center text-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black"/>
           </div>
@@ -97,7 +98,16 @@ function Addproduct() {
              className="block w-full text-2xl  text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black "/>
           </div>
         </div>
-        
+        <div className="col-span-12">
+          <label htmlFor="first-name" className="block text-sm font-xl mx-auto text-center leading-6 text-gray-900">Product Brand</label>
+          <div className="mt-2">
+            <input type="text" name="product-brand" id="first-name" autoComplete="given-name"
+             onChange={ (e) => {
+              //console.log(e.target.value);
+              setbrand(e.target.value)}}
+             className="block w-full text-2xl  text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black "/>
+          </div>
+        </div>
         <div className="col-span-12">
           <label htmlFor="first-name" className="block text-sm font-xl mx-auto text-center leading-6 text-gray-900">Product Quantity</label>
           <div className="mt-2">
@@ -119,7 +129,9 @@ function Addproduct() {
       <option value="">select product</option>
         <option value="stove">Stove</option>
         <option value="waterfilter">Waterfilter</option>
-        
+        <option value="frontload">Front Load</option>
+        <option value="chimney">Chimney</option>
+        <option value="topload">Top Load</option>
         </select>  
 
     </div>
@@ -131,7 +143,7 @@ function Addproduct() {
         </div>
         </div>
         <Button className= 'bg-blue-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '
-        onClick={() => SubmitAddProduct(productName,productDescription,productPrice,productQuantity, productCategory,setIsProductAdded,imagePath)}>
+        onClick={() => SubmitAddProduct(productName,productDescription,productPrice,productQuantity, productCategory,setIsProductAdded,imagePath,brand)}>
           <p className='text-center text-xl'>Submit</p>
         </Button>
       </div>

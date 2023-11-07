@@ -7,21 +7,23 @@ import { FilePath } from "aws-sdk/clients/ecr";
 
 
 function SubmitAddProduct(
-  productName: any,
-  productDescription: any,
-  productPrice: any,
-  productQuantity: any,
-  category: any,
-  setIsProductAdded: any,
+  productName:any,
+  productDescription:any,
+  productPrice:any,
+  productQuantity:any,
+  category:any,
+  setIsProductAdded:any,
   imgpath:String,
+  brand:any,
 ) {
   const prdbdy={
     productname: productName,
     description: productDescription,
     price: productPrice,
-    quantity: productQuantity,
     category: category,
+    quantity: productQuantity,
     imgpath: imgpath,
+    brand:brand
   }
 
 
@@ -58,6 +60,7 @@ export function getOrdersList(custId:any,setOrders:any, orderStatus:any){
     axios.get(url)
     .then( (res) => {
       if(res.status==200){
+        
           
       }
     })

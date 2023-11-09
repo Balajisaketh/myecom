@@ -12,7 +12,7 @@ function Addproduct() {
   const [productName, setProductName]=useState("");
   const [productDescription, setProductDescription]=useState("");
   const [productPrice, setProductPrice]=useState("");
-  const [productQuantity, setProductQuantity]=useState("");
+  // const [productQuantity, setProductQuantity]=useState("");
   const [brand,setbrand]=useState("")
   const [productCategory, setProductCategory]=useState("");
   const [isProductAdded, setIsProductAdded]=useState("");
@@ -108,7 +108,7 @@ function Addproduct() {
              className="block w-full text-2xl  text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black "/>
           </div>
         </div>
-        <div className="col-span-12">
+        {/* <div className="col-span-12">
           <label htmlFor="first-name" className="block text-sm font-xl mx-auto text-center leading-6 text-gray-900">Product Quantity</label>
           <div className="mt-2">
             <input type="number" 
@@ -118,7 +118,7 @@ function Addproduct() {
               setProductQuantity(e.target.value)}}
             id="first-name" autoComplete="given-name" className="block w-full text-2xl  text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black "/>
           </div>
-        </div>
+        </div> */}
         <div className="col-span-12">
           <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Product Category</label>
           <div className='flex flex-col mb-4 w-full  h-full '>
@@ -143,7 +143,7 @@ function Addproduct() {
         </div>
         </div>
         <Button className= 'bg-blue-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '
-        onClick={() => SubmitAddProduct(productName,productDescription,productPrice,productQuantity, productCategory,setIsProductAdded,imagePath,brand)}>
+        onClick={() => SubmitAddProduct(productName,productDescription,productPrice,productCategory,setIsProductAdded,imagePath,brand)}>
           <p className='text-center text-xl'>Submit</p>
         </Button>
       </div>

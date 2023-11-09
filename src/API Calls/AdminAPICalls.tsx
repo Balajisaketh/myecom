@@ -10,7 +10,6 @@ function SubmitAddProduct(
   productName:any,
   productDescription:any,
   productPrice:any,
-  productQuantity:any,
   category:any,
   setIsProductAdded:any,
   imgpath:String,
@@ -21,7 +20,6 @@ function SubmitAddProduct(
     description: productDescription,
     price: productPrice,
     category: category,
-    quantity: productQuantity,
     imgpath: imgpath,
     brand:brand
   }

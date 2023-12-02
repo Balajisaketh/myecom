@@ -1,38 +1,239 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { properties } from '../properties'
+import Updatemodal from '../modals/updatemodal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useDebounce } from '@uidotdev/usehooks';
 function Updateprod() {
+  
+  const [prods,setprods]=useState([])
+  const [searchVal, setSearchVal] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  
+
+ const[prodid,setprodid]=useState()
+ const [iddata,setiddata]=useState()
+ // API search results
+ 
+ 
+ const handleChange = (e:any) => {
+  console.log("i am entered")
+   setSearchTerm(e.target.value);
+ }
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const fetchdata=()=>{
+    axios.get("http://localhost:3001/getproducts").then((res:any)=>{
+      if(res.status==200)
+      {
+              console.log("i am rspns",res.data.rows);
+               setprods(res.data.rows)
+
+      }
+         
+     }).catch((err)=>{
+          console.log(err,"i am check error")
+     })
+  }
+
+const deleteprods=(iddataa:any)=>{
+  const url = `http://localhost:3001/deleteproduct/${iddataa}`;
+  axios.delete(url).then((res)=>{
+    if(res.status==200)
+    {
+      console.log('Product deleted successfully');
+      setprods((prevProducts) => prevProducts.filter((product:any) => product.uid !== iddataa));
+
+    }
+
+  }).catch((err)=>{
+    console.log('Product failed to delete',err);
+  })
+}
+const filterbyletter=()=>{
+
+}
+  
+  const updateprod=({price,name}:any)=>{
+    console.log("i am entered to update your data")
+    const url = `http://localhost:3001/updateproduct/${iddata}`;
+     // Replace 'products' with your actual API endpoint
+  
+    const body={
+     name:name,
+     price:price  
+    }
+    console.log("i am body",body);
+    axios.put(url,body).then((res)=>{
+         if(res.status==200)
+         {
+          console.log("ia m updatred plz",res.data.rows)
+            fetchdata()
+         }
+
+    }).catch((err)=>{
+      console.log("Update prod error",err)
+         
+    })
+
+  }
+  const apicall = (searchval:any)=>
+
+{
+    console.log("nter in apic a")
+    const body={
+                username:searchTerm
+            }
+             console.log("ia m search body",body)
+    axios.post(properties.baseURL +properties.searchbyname,body).then((res:any)=>
+      {
+        console.log(res,"i m red data");
+           
+        const filteredData = res.data.filter((order:any) =>
+        order.your_json_array_column.some(
+          (product:any) =>
+            product.productname &&
+            product.productname.toLowerCase().startsWith(searchTerm.toLowerCase())
+        )
+      );
+      console.log(filteredData,"i am filtered data")
+
+      setprods(filteredData);
+           
+      }).catch((err)=>
+      {
+        console.log("i am getting error",err);
+      })
+}
+
+  useEffect(()=>{
+         axios.get("http://localhost:3001/getproducts").then((res:any)=>{
+          if(res.status==200)
+          {
+                  console.log("i am rspns",res.data.rows);
+                   setprods(res.data.rows)
+
+          }
+             
+         }).catch((err)=>{
+              console.log(err,"i am check error")
+         })
+  },[])
+
   return (
+    
     <div className='space-y-10'>
-      <h1 className='text-center font-bold text-3xl mx-30'>Update Your Product</h1>
-      <div className="mt-10 grid grid-cols-12 gap-y-8 mx-40">
-        <div className="col-span-12">
-          <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Product Name</label>
-          <div className="mt-2">
-            <input type="text" name="first-name" id="first-name" autoComplete="given-name" 
-            placeholder="Product Name" 
-            className="block w-full text-center text-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black"/>
-          </div>
-        </div>
+      <h1 className='text-center font-bold text-3xl mx-30'>Your Products</h1>
+      {isModalOpen && (
+      <Updatemodal onclose={handleCloseModal} product={prodid} onprodupdate={()=>updateprod({})}/>
+      
+    )}
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
         
-        <div className="col-span-12">
-          <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Product Description</label>
-          <div className="mt-2">
-            <textarea
-              className="block w-full text-center text-base rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black"
-              placeholder="Product Description">
-            </textarea>
-          </div>
+        <label className="sr-only">Search</label>
+        <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input type="text" id="table-search-users" className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for Customers" onChange={handleChange}
+            />
         </div>
-        <div className="col-span-12">
-          <label htmlFor="first-name" className="block text-sm font-xl mx-auto text-center leading-6 text-gray-900">Product Price</label>
-          <div className="mt-2">
-            <input type="number" name="product-price" id="first-name" autoComplete="given-name" className="block w-full text-2xl  text-center rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black "/>
-          </div>
-        </div>
-        </div>
-        <div className= 'bg-red-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '>
-          <p className='text-center text-xl'>UPDATE</p>
-           </div>
+    </div>
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                
+                <th scope="col" className="px-6 py-3">
+                    Product Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Product price
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Product Image
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+          {
+            isSearching==true ?
+            (
+              <>
+              <FontAwesomeIcon icon={faSpinner}  size='xl'/>
+              </>
+            )
+            :
+          (
+            <>
+           {
+                 prods.map((val:any,index)=>{
+                  console.log("i am cheking val data",val)
+
+                    return (
+                      <>
+                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    
+                    <td scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                        <div className="pl-3">
+                            <div className="text-md">{val.name}</div>
+                            
+                        </div>  
+                       
+                    </td>
+                    <td className="px-6 py-4">
+                    <div className="font-normal text-gray-500">{val.price}</div>
+                    </td>
+                    
+                    <td className="px-6 py-4">
+                    <div className="font-normal text-gray-500">
+                      <img src={val.imagepath} className='h-10 w-20'/>
+                    </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <button className='border-black text-md text-red'
+                      onClick={()=>{
+                        handleOpenModal()
+                        setprodid(val)
+                        setiddata(val?.uid)
+                      } }
+                      
+                      >Update</button>
+                    </td>
+                    <td className="px-6 py-4">
+                    <FontAwesomeIcon icon={faTrash} color='red'  onClick={()=>deleteprods(val?.uid)}/>
+                    </td>
+                </tr>
+                      
+                      </>
+                    )
+                 })
+           }
+           </>
+          )
+}
+               
+        </tbody>
+    </table>
+</div>
+
 
     </div>
     

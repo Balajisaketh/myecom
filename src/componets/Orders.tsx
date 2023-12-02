@@ -2,20 +2,39 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { getCustomersList, getOrdersList} from '../API Calls/AdminAPICalls';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function Orders() {
     const location = useLocation();
     const {state} = location;
     let custId:any[] = [];
     const [orderStatus, setOrderStatus] = useState("");
-    if(state.customerId != null){
-    custId = state.customerId
-    }
+    const [filteredNames, setFilteredNames] = useState<any>(null);
+    const [filterLetter, setFilterLetter] = useState('');
+    // if(state.customerId != null){
+    // custId = state.customerId
+    // }
     const [orders, setOrders] = useState<any[]>([]);
     console.log(custId)
     useEffect(() => {
-        getOrdersList(custId,setOrders, orderStatus);
-    });
+        axios.get("http://localhost:3001/getallorders").then((res)=>{
+            console.log(res,"i am data from customers");
+            setOrders(res.data)
+
+        }
+        ).catch((err)=>{
+            console.log("ia m error in customer orders data");
+        })
+        
+        
+    },[]);
+    const handleFilter = (letter:any) => {
+        // Update the filter letter and filter names accordingly
+        setFilterLetter(letter);
+        const filtered = orders.filter((name) => name.toLowerCase().startsWith(letter.toLowerCase()));
+        console.log("i am searched",filtered);
+        setFilteredNames(filtered);
+      };
   return (
     <div className='space-y-10'>
       <h1 className='text-center font-bold text-3xl mx-30'>Order Details</h1>
@@ -34,18 +53,24 @@ function Orders() {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 
-                <th scope="col" className="px-6 py-3">
-                    Product
+            <th scope="col" className="px-6 py-3">
+                    Order id
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Price
+                   Customer name
+                </th>
+                
+                
+                <th scope="col" className="px-6 py-3">
+                    email
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Quantity
+                    Date
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Status
+                    order details
                 </th>
+               
             </tr>
         </thead>
         <tbody>
@@ -55,20 +80,18 @@ function Orders() {
                     
                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="pl-3">
-                            <div className="text-base font-semibold">{data.username}</div>
+                            <div className="text-md">{data.orderid}</div>
                             
                         </div>  
                     </th>
                     <td className="px-6 py-4">
-                    <div className="font-normal text-gray-500">{data.email}</div>
+                    <div className="font-normal text-gray-500">{data.name}</div>
                     </td>
                     <td className="px-6 py-4">
-                        <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >Get orders</div>
+                        <p>{data.email}</p>
                     </td>
                     <td className="px-6 py-4">
-                        <div className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                        >Edit user</div>
+                      {data.date}
                     </td>
                 </tr>
                 ))

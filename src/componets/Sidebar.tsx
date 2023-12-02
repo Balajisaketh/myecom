@@ -33,24 +33,22 @@ function Sidebar() {
 <div className='px-10' >
 <p className='drop-shadow-md z-20 bg-green-300 py-3 rounded-md'><Link to='/updateproduct'>Update Products</Link></p>
 </div>
-<div className='px-10'>
-<p className='drop-shadow-md z-20 bg-red-300 py-3 rounded-md'><Link to="/deleteproduct">Delete Product</Link></p>
-</div>
+
 </div>
 </>
         ):(
           <></>
         )
       }
-      <div className='flex mx-5 py-10 px-4 relative space-x-4'>
+      {/* <div className='flex mx-5 py-10 px-4 relative space-x-4'>
 
       
 <FontAwesomeIcon icon={faUsers} className='mt-1'/>
 <p><Link to="/customers">Customer</Link> </p>
 
 
-</div>
-      <div className='flex mx-5 py-10 px-4 relative space-x-4'>
+</div> */}
+      <div className='flex mx-5 py-3 px-4 relative space-x-4'>
 
       
       <FontAwesomeIcon icon={faShoppingCart} className='mt-1'/>

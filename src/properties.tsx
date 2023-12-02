@@ -4,6 +4,6 @@ export const properties = {
     baseURL:"http://localhost:3001",
     addProductsURL:"/addproduct",
     getCustomerListURL:"/getusers",
-    getCustomerOrders:"/cusorders",
+    getCustomerOrders:"/getallorders",
    searchbyname:"/searchbyname/"
 }

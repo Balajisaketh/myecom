@@ -130,8 +130,9 @@ function Addproduct() {
         <option value="stove">Stove</option>
         <option value="waterfilter">Waterfilter</option>
         <option value="frontload">Front Load</option>
-        <option value="chimney">Chimney</option>
+        <option value="chimneys">Chimney</option>
         <option value="topload">Top Load</option>
+        <option value="washingpowders">Washing Powders</option>
         </select>  
 
     </div>

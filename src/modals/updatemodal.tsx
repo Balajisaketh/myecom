@@ -1,22 +1,21 @@
 import { useState } from "react";
 
 const Updatemodal=({onclose,product,onprodupdate}:any)=>{
-    const [price, setPrice] = useState('');
-  const [name, setname] = useState('');
+  const [price, setPrice] = useState(product.price || ''); // Use product.price as default value if available
+  const [name, setname] = useState(product.name || '');
   
-  const handleUpdate = () => {
-    console.log("i am cheking values",name,price)
-    if(name.length==0)
-    {
-        setname(product.name)
-    }
-    else if(price.length==0)
-    {
-        setPrice(product.price)
-    }
-    console.log("i am a value of name",name)
+  const handleUpdate = (e:any) => {
+    e.preventDefault();
+  
+    
+    const updatedName = name === '' ? product.name : name;
+    const updatedPrice = price === '' ? product.price : price;
+    setname(updatedName);
+    setPrice(updatedPrice);
+    console.log(name,price,"we are here ra");
     // Assuming productId is passed as a prop or some state
-    onprodupdate({ price, name });
+    onprodupdate({name:updatedName,price:updatedPrice});
+    onclose();
   };
   const defaultcheck=()=>{
     if(product.name==name || name==undefined)
@@ -53,7 +52,7 @@ console.log("updating",name,price)
       <div className="flex ">
       <button
       className="bg-yellow-800 mt-2 p-4 mb-5 w-1/4 mx-auto text-white rounded"
-      onClick={()=>handleUpdate()}
+      onClick={(e)=>handleUpdate(e)}
       >
         Update</button> 
       <button

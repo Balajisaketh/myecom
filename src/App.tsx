@@ -9,13 +9,14 @@ import Updateprodlayout from './componets/Updateprodlayout';
 import Customerlayout from './componets/CustomerLayout';
 import OrdersLayout from './componets/OrdersLayout';
 import Orderdetails from './componets/orderdetails';
+import Login from './Login';
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<OrdersLayout/>}></Route>
+      <Route path="/" element={<Login/>}></Route>
+        <Route path="/home" element={<OrdersLayout/>}></Route>
         <Route path="/addproduct" element={<Addproductlayout/>}></Route>
-        
         <Route path="/updateproduct" element={<Updateprodlayout/>}></Route>
         <Route path ="/customers" element={<Customerlayout />} ></Route>
         <Route path ="/orders" element={<OrdersLayout />} ></Route>

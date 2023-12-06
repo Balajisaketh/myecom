@@ -54,9 +54,13 @@ function Sidebar() {
       <FontAwesomeIcon icon={faShoppingCart} className='mt-1'/>
 <p><Link to="/orders">Orders</Link> </p>
 </div>
-<div className='flex mx-5 py-10 px-4 relative space-x-4'>
+<div className='flex mx-5 py-10 px-4 relative space-x-4'
+>
 <FontAwesomeIcon icon={faRightToBracket} className='mt-1'/>
-<p>Log Out</p>
+<p onClick={()=>{
+  localStorage.removeItem("tokkendata")
+  navigate("/")
+}}>Log Out</p>
 
 </div>
    </div>

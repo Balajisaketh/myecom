@@ -22,15 +22,34 @@ function Login()
   else if(emailRegex.test(email) )
   {
     setStatus("entered");
-      axios.post("http://localhost:3001/api/login").then((res:any)=>{
-        if(res.message==="Login successful")
+    const body={
+        username:email,
+        password:passw
+    }
+    
+
+      axios.post("http://localhost:3001/api/login",body).then((res:any)=>{
+        console.log(res.data,"ui am rpinse")
+        const { token, message } = res.data;
+        console.log("iam validating",token,message);
+
+        if(message==="login successful")
         {
+          
+          
+
+          // Store the token in localStorage (replace 'your_token_key' with your actual token key)
+          localStorage.setItem("tokkendata", token);
+    
+          console.log("Navigating to /home...");
              navigate("/home")
         }
         else{
-           console.log("error");   
+          setStatus("wrongcredentials");
         }
-
+        
+      }).catch((err)=>{
+          console.log("i am err",err);
       })
   }
 
@@ -48,7 +67,7 @@ function Login()
            <Alert color="info">
   <span>
     <p>
-      <span className="font-medium text-center">
+      <span className="font-medium text-center text-white">
         Enter your details      
       </span>
 
@@ -57,9 +76,39 @@ function Login()
 </Alert>
 </div>
            </>:
+           
+           status=="wrongcredentials" ?
            <>
-  
+           <div className='bg-red-400 w-[30vw] mx-auto p-3 rounded-md text-white '>
+           <Alert color="info">
+  <span>
+    <p>
+      <span className="font-medium text-center">
+       Invalid Email or Password
+      </span>
+
+    </p>
+  </span>
+</Alert>
+</div>
            </>
+           :
+           status=="entered" ?
+           <>
+           <div className='bg-green-400 w-[30vw] mx-auto p-3 rounded-md text-white '>
+           <Alert  color="success">
+  <span>
+    <p>
+      <span className="font-medium text-center">
+       Login Successful
+      </span>
+
+    </p>
+  </span>
+</Alert>
+</div>
+</>:
+<></>
          
         }
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -69,7 +118,7 @@ function Login()
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Login  to your account
+            Srivasista Admin 
           </h2>
         </div>
 

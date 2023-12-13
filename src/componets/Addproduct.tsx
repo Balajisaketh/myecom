@@ -51,13 +51,50 @@ function Addproduct() {
     console.log("uploadtos3",imagePath);
     
   }
+  const handleFormSubmit = () => {
+    // Your form submission logic goes here
+    console.log('Before State Update:', {
+      productName,
+      productDescription,
+      productPrice,
+      brand,
+      productCategory,
+      prodimage,
+    });
+    SubmitAddProduct(
+      productName,
+      productDescription,
+      productPrice,
+      productCategory,
+      setIsProductAdded,
+      imagePath,
+      brand
+    );
+    setProductName('');
+    setProductDescription('');
+    setProductPrice('');
+    setbrand('');
+    setProductCategory('');
+    setProdimage(undefined);
+    console.log('After State Update:', {
+      productName,
+      productDescription,
+      productPrice,
+      brand,
+      productCategory,
+      prodimage,
+    });
+    // Reset the form fields
+    
+  }
+  
   return (
   <>
   
         <div>
         {renderSuccessAlert(productName,isProductAdded, setIsProductAdded)}
         
-<form>
+<form >
   <div className="space-y-12">
   
     <div className="pb-8">
@@ -69,6 +106,7 @@ function Addproduct() {
           <div className="mt-2">
             <input type="text" name="first-name" id="first-name" autoComplete="given-name" 
             placeholder="Product Name" 
+            value={productName}
             onChange={ (e) => {
               //console.log(e.target.value);  
               setProductName(e.target.value)}}
@@ -82,6 +120,7 @@ function Addproduct() {
             <textarea
               className="block w-full text-center text-base rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-black"
               placeholder="Product Description"
+              value={productDescription}
                onChange={ (e) => {
               //console.log(e.target.value);
               setProductDescription(e.target.value)}}>
@@ -91,7 +130,7 @@ function Addproduct() {
         <div className="col-span-12">
           <label htmlFor="first-name" className="block text-sm font-xl mx-auto text-center leading-6 text-gray-900">Product Price</label>
           <div className="mt-2">
-            <input type="number" name="product-price" id="first-name" autoComplete="given-name"
+            <input type="number" name="product-price" id="first-name" autoComplete="given-name" value={productPrice}
              onChange={ (e) => {
               //console.log(e.target.value);
               setProductPrice(e.target.value)}}
@@ -101,7 +140,7 @@ function Addproduct() {
         <div className="col-span-12">
           <label htmlFor="first-name" className="block text-sm font-xl mx-auto text-center leading-6 text-gray-900">Product Brand</label>
           <div className="mt-2">
-            <input type="text" name="product-brand" id="first-name" autoComplete="given-name"
+            <input type="text" name="product-brand" id="first-name" autoComplete="given-name" value={brand}
              onChange={ (e) => {
               //console.log(e.target.value);
               setbrand(e.target.value)}}
@@ -125,7 +164,7 @@ function Addproduct() {
 
    
 
-<select onChange={(event)=>setProductCategory(event.target.value)} id="repeat-password" className="shadow-sm   border   text-gray-900 text-sm rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="" >
+<select onChange={(event)=>setProductCategory(event.target.value)} id="repeat-password" value={productCategory} className="shadow-sm   border   text-gray-900 text-sm rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="" >
       <option value="">select product</option>
         <option value="stove">Stove</option>
         <option value="waterfilter">Waterfilter</option>
@@ -144,7 +183,7 @@ function Addproduct() {
         </div>
         </div>
         <Button className= 'bg-blue-600 mx-auto text-center my-auto mt-10 text-white w-40  rounded-md py-2 text-lg  '
-        onClick={() => SubmitAddProduct(productName,productDescription,productPrice,productCategory,setIsProductAdded,imagePath,brand)}>
+        onClick={() => handleFormSubmit()}>
           <p className='text-center text-xl'>Submit</p>
         </Button>
       </div>

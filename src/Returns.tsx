@@ -35,8 +35,8 @@ function Returns() {
         setIsSearching(false);
       }, [debouncedSearchTerm]);
       const handleChange = (e:any) => {
-        console.log("i am entered")
-         setSearchTerm(e.target.value.toLowerCase());
+        console.log("i am entered",e.target.value)
+         setSearchTerm(e.target.value);
       
          filterprods()
       
@@ -54,6 +54,7 @@ function Returns() {
         else{
           setcheck("present")
         const filteredProducts = orders.filter((product:any) =>
+
           product.id.toLowerCase().includes(debouncedSearchTerm)
         );
         console.log("i am filtered here",filteredProducts);
@@ -95,7 +96,7 @@ function Returns() {
             <tr>
                 
             <th scope="col" className="px-6 py-3">
-                    Order id
+                    Return id
                 </th>
                 <th scope="col" className="px-6 py-3">
                    Product name

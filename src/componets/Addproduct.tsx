@@ -171,6 +171,7 @@ function Addproduct() {
         <option value="frontload">Front Load</option>
         <option value="chimneys">Chimney</option>
         <option value="topload">Top Load</option>
+        <option value="geysers">Geysers</option>
         <option value="washingpowders">Washing Powders</option>
         </select>  
 

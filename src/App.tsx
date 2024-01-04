@@ -10,6 +10,7 @@ import Customerlayout from './componets/CustomerLayout';
 import OrdersLayout from './componets/OrdersLayout';
 import Orderdetails from './componets/orderdetails';
 import Login from './Login';
+import Returnlayout from './Returnlayout';
 function App() {
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
         <Route path ="/customers" element={<Customerlayout />} ></Route>
         <Route path ="/orders" element={<OrdersLayout />} ></Route>
         <Route path='/orderdetails' element={<Orderdetails/>}></Route>
+        <Route path='/returns' element={<Returnlayout/>}></Route>
       </Routes>
       
     </div>

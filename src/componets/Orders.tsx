@@ -63,7 +63,7 @@ function Orders() {
       }
     console.log(custId)
     useEffect(() => {
-        axios.get("http://localhost:3001/getallorders").then((res)=>{
+        axios.get("https://srivasishtaenterprises.com/getallorders").then((res)=>{
             console.log(res,"i am data from customers");
             setOrders(res.data)
 

@@ -23,12 +23,12 @@ function Login()
   {
     setStatus("entered");
     const body={
-        username:email,
+        email:email,
         password:passw
     }
     
 
-      axios.post("http://localhost:3001/api/login",body).then((res:any)=>{
+      axios.post("https://srivasishtaenterprises.com/api/login",body).then((res:any)=>{
         console.log(res.data,"ui am rpinse")
         const { token, message } = res.data;
         console.log("iam validating",token,message);

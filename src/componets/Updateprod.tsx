@@ -57,7 +57,8 @@ function Updateprod() {
     setIsModalOpen(false);
   };
   const fetchdata=()=>{
-    axios.get("http://localhost:3001/getproducts").then((res:any)=>{
+    axios.get("https://srivasishtaenterprises.com/getproducts").then((res:any)=>{
+      console.log(res,"i am oroduct get")
       if(res.status==200)
       {
               // console.log("i am rspns",res.data.rows);
@@ -71,7 +72,7 @@ function Updateprod() {
   }
 
 const deleteprods=(iddataa:any)=>{
-  const url = `http://localhost:3001/deleteproduct/${iddataa}`;
+  const url = `https://srivasishtaenterprises.com/deleteproduct/${iddataa}`;
   axios.delete(url).then((res)=>{
     if(res.status==200)
     {
@@ -88,7 +89,7 @@ const deleteprods=(iddataa:any)=>{
   
   const updateprod=({price,name}:any)=>{
     console.log("i am entered to update your data",price,name)
-    const url = `http://localhost:3001/updateproduct/${iddata}`;
+    const url = `https://srivasishtaenterprises.com/updateproduct/${iddata}`;
      // Replace 'products' with your actual API endpoint
   
     const body={
@@ -112,7 +113,7 @@ const deleteprods=(iddataa:any)=>{
  
 
   useEffect(()=>{
-         axios.get("http://localhost:3001/getproducts").then((res:any)=>{
+         axios.get("https://srivasishtaenterprises.com/getproducts").then((res:any)=>{
           if(res.status==200)
           {
                   console.log("i am rspns",res.data.rows);

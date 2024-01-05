@@ -64,9 +64,9 @@ function Returns() {
       }
     console.log(custId)
     useEffect(() => {
-        axios.get("http://localhost:3001/getreturns").then((res)=>{
-            console.log(res.data,"i am data from returns");
-            setOrders(res.data)
+        axios.get("https://srivasishtaenterprises.com/getreturns").then((res)=>{
+            console.log(res.data.message.rows,"i am data from returns");
+            setOrders(res.data.message.rows)
 
         }
         ).catch((err)=>{
@@ -169,7 +169,7 @@ function Returns() {
                     <td className="px-3 py-4 whitespace-nowrap">
                     <div className="font-normal text-gray-500">{formatedDate}</div>
                     </td>
-                   
+                   b
                 </tr>
                       
                       </>

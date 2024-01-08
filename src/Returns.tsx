@@ -169,7 +169,10 @@ function Returns() {
                     <td className="px-3 py-4 whitespace-nowrap">
                     <div className="font-normal text-gray-500">{formatedDate}</div>
                     </td>
-                   b
+                    <td className="px-3 py-4 whitespace-nowrap">
+                    <img src={val?.product_url} className='h-20 w-20'/>
+                    </td>
+                   
                 </tr>
                       
                       </>
@@ -218,7 +221,10 @@ function Returns() {
                     <td className="px-3 py-4 whitespace-nowrap">
                     <div className="font-normal text-gray-500">{formatedDate}</div>
                     </td>
-                   
+                    <td className="px-3 py-4 whitespace-nowrap">
+                    <img src={val?.product_url} className='h-20 w-20'/>
+                    
+                    </td>
                    
                 </tr>
                       

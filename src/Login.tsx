@@ -23,7 +23,7 @@ function Login()
   {
     setStatus("entered");
     const body={
-        email:email,
+        username:email,
         password:passw
     }
     

@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useDebounce } from 'use-debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -35,7 +35,7 @@ function Returns() {
         setIsSearching(false);
       }, [debouncedSearchTerm]);
       const handleChange = (e:any) => {
-        console.log("i am entered",e.target.value)
+        // console.log("i am entered",e.target.value)
          setSearchTerm(e.target.value);
       
          filterprods()
@@ -44,8 +44,8 @@ function Returns() {
       
       const filterprods=()=>{
         setIsSearching(true);
-        console.log("eneted here in to filter",searchTerm)
-        console.log(orders,"i am resdata");
+        // console.log("eneted here in to filter",searchTerm)
+        // console.log(orders,"i am resdata");
         if(searchTerm==='')
         {
            setcheck("empty")
@@ -57,7 +57,7 @@ function Returns() {
 
           product.id.toLowerCase().includes(debouncedSearchTerm)
         );
-        console.log("i am filtered here",filteredProducts);
+        // console.log("i am filtered here",filteredProducts);
           setFilteredProds(filteredProducts);
           setIsSearching(false);
        }
@@ -65,7 +65,7 @@ function Returns() {
     console.log(custId)
     useEffect(() => {
         axios.get("https://vasistastore.com/getreturns").then((res)=>{
-            console.log(res.data.message.rows,"i am data from returns");
+            // console.log(res.data.message.rows,"i am data from returns");
             setOrders(res.data.message.rows)
 
         }
@@ -95,23 +95,23 @@ function Returns() {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 cursor-pointer">
                     Return id
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 cursor-pointer">
                    Product name
                 </th>
                 
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 cursor-pointer">
                     Price
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 cursor-pointer">
                     Quantity
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 cursor-pointer">
                     Date
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 cursor-pointer">
                     product image
                 </th>
                
@@ -130,20 +130,11 @@ function Returns() {
             <>
            {
                  filteredProds.map((val:any,index)=>{
-                  console.log("i am cheking val data",val)
+                  // console.log("i am cheking val data",val)
 
-                  // const formatedDate = new Date(val?.date).toLocaleString(
-                  //   'en-IN',
-                  //     {
-                  //       month: "short",
-                  //       day: "2-digit",
-                  //       year: "numeric",
-                  //     }
-                  // );
+                  
                   const formatedDate=new Date(val?.return_date).getDate()+"/"+(new Date(val?.return_date).getMonth()+1)+"/"+new Date(val?.return_date).getFullYear()
-                   console.log(formatedDate,"in m bey")
-
-                  console.log("i am chein date",formatedDate);
+                   
 
                     return (
                       <>
@@ -151,26 +142,26 @@ function Returns() {
                     
                     <td scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="pl-3">
-                            <div className="text-md">{val.id}</div>
+                            <div className="text-md cursor-pointer">{val.id}</div>
                             
                         </div>  
                        
                     </td>
                     <td className="px-6 py-4">
-                    <div className="font-normal text-gray-500">{val.product_name}</div>
+                    <div className="font-normal text-gray-500 cursor-pointer">{val.product_name}</div>
                     </td>
                     
                     <td className="px-4 py-4">
-                    <div className="font-normal text-gray-500">{val.price}</div>
+                    <div className="font-normal text-gray-500 cursor-pointer"><span><FontAwesomeIcon icon={faIndianRupeeSign}/></span>{" "+val.price}</div>
                     </td>
                     <td className="px-4 py-4">
-                    <div className="font-normal text-gray-500">{val.quantity}</div>
+                    <div className="font-normal text-gray-500 cursor-pointer">{val.quantity}</div>
                     </td>
                     <td className="px-3 py-4 whitespace-nowrap">
-                    <div className="font-normal text-gray-500">{formatedDate}</div>
+                    <div className="font-normal  cursor-pointer text-gray-500">{formatedDate}</div>
                     </td>
                     <td className="px-3 py-4 whitespace-nowrap">
-                    <img src={val?.product_url} className='h-20 w-20'/>
+                    <img src={val?.product_url} className='h-20 w-20 cursor-pointer'/>
                     </td>
                    
                 </tr>
@@ -184,19 +175,9 @@ function Returns() {
             <>
             {
                  orders?.map((val:any,index)=>{
-                  console.log("i am orderds data",val)
-                  // const formatedDate = new Date(val?.date).toLocaleString(
-                  //   'en-IN',
-                  //     {
-                  //       month: "short",
-                  //       day: "2-digit",
-                  //       year: "numeric",
-                  //     }
-                  // );
+                  
                   const formatedDate=new Date(val?.return_date).getDate()+"/"+(new Date(val?.return_date).getMonth()+1)+"/"+new Date(val?.return_date).getFullYear()
-                  console.log(formatedDate,"in m bey")
-
-                 console.log("i am chein date",formatedDate);
+                  
                   
                     return (
                       <>
@@ -204,25 +185,25 @@ function Returns() {
                     
                     <td scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="pl-3">
-                            <div className="text-md">{val.id}</div>
+                            <div className="text-md cursor-pointer">{val.id}</div>
                             
                         </div>  
                        
                     </td>
                     <td className="px-4 py-4">
-                    <div className="font-normal text-gray-500">{val.product_name}</div>
+                    <div className="font-normal cursor-pointer text-gray-500">{val.product_name}</div>
                     </td>
                     <td className="px-4 py-4">
-                    <div className="font-normal text-gray-500">{val.price}</div>
+                    <div className="font-normal  cursor-pointer text-gray-500"><span><FontAwesomeIcon icon={faIndianRupeeSign}/></span>{" "+val.price}</div>
                     </td>
                     <td className="px-4 py-4">
-                    <div className="font-normal text-gray-500">{val.quantity}</div>
+                    <div className="font-normal cursor-pointer text-gray-500">{val.quantity}</div>
+                    </td>
+                    <td className="px-3 py-4 whitespace-nowrap cursor-pointer">
+                    <div className="font-normal text-gray-500 cursor-pointer">{formatedDate}</div>
                     </td>
                     <td className="px-3 py-4 whitespace-nowrap">
-                    <div className="font-normal text-gray-500">{formatedDate}</div>
-                    </td>
-                    <td className="px-3 py-4 whitespace-nowrap">
-                    <img src={val?.product_url} className='h-20 w-20'/>
+                    <img src={val?.product_url} className='h-20 w-20 cursor-pointer'/>
                     
                     </td>
                    

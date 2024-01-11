@@ -1,4 +1,4 @@
-import { faArrowLeft, faArrowRotateBack } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRotateBack, faIndianRupee, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useLocation,useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ function Orderdetails(){
   const { state } = location;
 
 
-    console.log("i am product details",proddetails,state?.custname)
+    // console.log("i am product details",proddetails,state?.custname)
 
     return (
        <>
@@ -29,7 +29,7 @@ navigate("/orders")
             console.log(index,val,"we both r here");
             return (
           <>
-           <div className="grid grid-flow-col gap-2 grid-cols-12 mx-auto my-10 ">
+           <div className="grid grid-flow-col gap-2 grid-cols-12 mx-auto my-10 cursor-pointer">
           <div className="col-span-3">
           <img
           src={val?.imageUrl}
@@ -45,7 +45,7 @@ navigate("/orders")
            </div>
 
            <div className="col-span-2">
-             <p className="font-medium my-[20vh]">{val?.quantity*val?.price}</p>
+             <p className="font-medium my-[20vh]"><span><FontAwesomeIcon icon={faIndianRupeeSign}/></span>{" "+val?.quantity*val?.price}</p>
            </div>
               
             </div>

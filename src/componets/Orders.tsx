@@ -35,7 +35,7 @@ function Orders() {
         setIsSearching(false);
       }, [debouncedSearchTerm]);
       const handleChange = (e:any) => {
-        console.log("i am entered")
+        // console.log("i am entered")
          setSearchTerm(e.target.value.toLowerCase());
       
          filterprods()
@@ -44,8 +44,8 @@ function Orders() {
       
       const filterprods=()=>{
         setIsSearching(true);
-        console.log("eneted here in to filter",searchTerm)
-        console.log(orders,"i am resdata");
+        // console.log("eneted here in to filter",searchTerm)
+        // console.log(orders,"i am resdata");
         if(searchTerm==='')
         {
            setcheck("empty")
@@ -56,7 +56,7 @@ function Orders() {
         const filteredProducts = orders.filter((product:any) =>
           product.orderid.toLowerCase().includes(debouncedSearchTerm)
         );
-        console.log("i am filtered here",filteredProducts);
+        // console.log("i am filtered here",filteredProducts);
           setFilteredProds(filteredProducts);
           setIsSearching(false);
        }
@@ -64,7 +64,7 @@ function Orders() {
     console.log(custId)
     useEffect(() => {
         axios.get("https://vasistastore.com/getallorders").then((res)=>{
-            console.log(res,"i am data from customers");
+            // console.log(res,"i am data from customers");
             setOrders(res.data)
 
         }
@@ -126,7 +126,7 @@ function Orders() {
             <>
            {
                  filteredProds.map((val:any,index)=>{
-                  console.log("i am cheking val data",val)
+                  // console.log("i am cheking val data",val)
                   const formatedDate = new Date(val?.date).toLocaleString(
                     'en-IN',
                       {
@@ -138,7 +138,7 @@ function Orders() {
 
                     return (
                       <>
-                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
                     
                     <td scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="pl-3">
@@ -178,7 +178,7 @@ function Orders() {
             <>
             {
                  orders?.map((val:any,index)=>{
-                  console.log("i am orderds data",val)
+                  // console.log("i am orderds data",val)
                   const formatedDate = new Date(val?.date).toLocaleString(
                     'en-IN',
                       {
@@ -190,7 +190,7 @@ function Orders() {
                   
                     return (
                       <>
-                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer">
                     
                     <td scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="pl-3">

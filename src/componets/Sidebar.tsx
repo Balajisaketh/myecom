@@ -17,7 +17,7 @@ function Sidebar() {
     <h1 className='text-black text-3xl py-4 font-semibold'>Sri Vashista</h1>
       <div className='flex mx-5 py-10 px-10 relative'>
 
-         <Link to='Prodcuts'>Products</Link>
+         <h1>Products</h1>
          <FontAwesomeIcon icon={faAngleDown} color='black' className={open?'absolute right-4 mt-2 rotate-180':'absolute right-4 mt-2'} onClick={()=>setopen(!open)}/>
       </div>
       <div>

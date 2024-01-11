@@ -29,7 +29,7 @@ function Login()
     
 
       axios.post("https://vasistastore.com/api/login",body).then((res:any)=>{
-        console.log(res.data,"ui am rpinse")
+        // console.log(res.data,"ui am rpinse")
         const { token, message } = res.data;
         console.log("iam validating",token,message);
 
@@ -41,7 +41,7 @@ function Login()
           // Store the token in localStorage (replace 'your_token_key' with your actual token key)
           localStorage.setItem("tokkendata", token);
     
-          console.log("Navigating to /home...");
+          // console.log("Navigating to /home...");
              navigate("/home")
         }
         else{

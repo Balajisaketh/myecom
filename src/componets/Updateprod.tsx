@@ -3,7 +3,7 @@ import axios from 'axios'
 import { properties } from '../properties'
 import Updatemodal from '../modals/updatemodal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupeeSign, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDebounce } from '@uidotdev/usehooks';
 
 function Updateprod() {
@@ -24,7 +24,7 @@ function Updateprod() {
  
  
  const handleChange = (e:any) => {
-  console.log("i am entered")
+  // console.log("i am entered")
    setSearchTerm(e.target.value.toLowerCase());
 
    filterprods()
@@ -32,8 +32,8 @@ function Updateprod() {
  }
  const filterprods=()=>{
   setIsSearching(true);
-  console.log("eneted here in to filter",searchTerm)
-  console.log(prods,"i am resdata");
+  // console.log("eneted here in to filter",searchTerm)
+  // console.log(prods,"i am resdata");
   if(searchTerm==='')
   {
      setcheck("empty")
@@ -44,7 +44,7 @@ function Updateprod() {
   const filteredProducts = prods.filter((product:any) =>
     product.name.toLowerCase().includes(debouncedSearchTerm)
   );
-  console.log("i am filtered here",filteredProducts);
+  // console.log("i am filtered here",filteredProducts);
     setFilteredProds(filteredProducts);
     setIsSearching(false);
  }
@@ -58,7 +58,7 @@ function Updateprod() {
   };
   const fetchdata=()=>{
     axios.get("https://vasistastore.com/getproducts").then((res:any)=>{
-      console.log(res,"i am oroduct get")
+      // console.log(res,"i am oroduct get")
       if(res.status==200)
       {
               // console.log("i am rspns",res.data.rows);
@@ -76,7 +76,7 @@ const deleteprods=(iddataa:any)=>{
   axios.delete(url).then((res)=>{
     if(res.status==200)
     {
-      console.log('Product deleted successfully');
+      // console.log('Product deleted successfully');
       setprods((prevProducts) => prevProducts.filter((product:any) => product.uid !== iddataa));
 
     }
@@ -88,7 +88,7 @@ const deleteprods=(iddataa:any)=>{
 
   
   const updateprod=({price,name}:any)=>{
-    console.log("i am entered to update your data",price,name)
+    // console.log("i am entered to update your data",price,name)
     const url = `https://vasistastore.com/updateproduct/${iddata}`;
      // Replace 'products' with your actual API endpoint
   
@@ -96,7 +96,7 @@ const deleteprods=(iddataa:any)=>{
      name:name,
      price:price  
     }
-    console.log("i am body",body);
+    // console.log("i am body",body);
     axios.put(url,body).then((res)=>{
          if(res.status==200)
          {
@@ -116,7 +116,7 @@ const deleteprods=(iddataa:any)=>{
          axios.get("https://vasistastore.com/getproducts").then((res:any)=>{
           if(res.status==200)
           {
-                  console.log("i am rspns",res.data.rows);
+                  // console.log("i am rspns",res.data.rows);
                    setprods(res.data.rows)
 
           }
@@ -187,7 +187,7 @@ const deleteprods=(iddataa:any)=>{
             <>
            {
                  filteredProds.map((val:any,index)=>{
-                  console.log("i am cheking val data",val)
+                  // console.log("i am cheking val data",val)
 
                     return (
                       <>
@@ -233,26 +233,27 @@ const deleteprods=(iddataa:any)=>{
             <>
             {
                  prods?.map((val:any,index)=>{
-                  console.log("i am cheking val data",val)
+                  // console.log("i am cheking val data",val)
 
                     return (
                       <>
                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
                     <td scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                        <div className="pl-3">
+                        <div className="pl-3 cursor-pointer">
                             <div className="text-md">{val.name}</div>
                             
                         </div>  
                        
                     </td>
-                    <td className="px-6 py-4">
-                    <div className="font-normal text-gray-500">{val.price}</div>
+                    <td className="px-6 py-4 cursor-pointer">
+                    <div className="font-normal text-gray-500">
+                      <span><FontAwesomeIcon icon={faIndianRupeeSign}/></span>{"  "+val.price}</div>
                     </td>
                     
                     <td className="px-6 py-4">
-                    <div className="font-normal text-gray-500">
-                      <img src={val.imagepath} className='h-10 w-20'/>
+                    <div className="font-normal text-gray-500 cursor-pointer">
+                      <img src={val.imagepath} className='h-10 w-20 cursor-pointer'/>
                     </div>
                     </td>
                     <td className="px-6 py-4">
@@ -265,7 +266,7 @@ const deleteprods=(iddataa:any)=>{
                       
                       >Update</button>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-4 cursor-pointer">
                     <FontAwesomeIcon icon={faTrash} color='red'  onClick={()=>deleteprods(val?.uid)}/>
                     </td>
                 </tr>

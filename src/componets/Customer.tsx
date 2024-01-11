@@ -16,76 +16,23 @@ function Customer() {
    
   // API search results
   const [results, setResults] = useState([]);
-  // Searching status (whether there is pending API request)
- 
-  // ... if searchTerm has not been updated within last 500ms.
-  // The goal is to only have the API call fire when user stops typing ...
-  // ... so that we aren't hitting our API rapidly.
-//   const debouncedSearchTerm = useDebounce(searchVal, 2000);
-//   console.log("i m debounced search term",debouncedSearchTerm)
-//   // Effect for API call
-//  useEffect(()=>{
-// if(debouncedSearchTerm)
-// {
-//     console.log("debounced search term here",debouncedSearchTerm);
-//     const body={
-//         username:debouncedSearchTerm
-//     }
-//   axios.post(properties.baseURL +properties.searchbyname,body).then((res:any)=>
-//   {
-//     console.log(res,"i m red data");
-//        setstatus({val:"done"});
-//        setResults(res.data);
-//   }).catch((err)=>
-//   {
-//     setstatus({val:"error"});
-//   })
-// }
-// else{
-//    setstatus({val:"empty"});
-// }
-//  },[debouncedSearchTerm])
-  
 
-// // Hook
-
-// function useDebounce(value:any, delay:any) {
-//     console.log("useDebounce",value);
-//   // State and setters for debounced value
-//   const [debouncedValue, setDebouncedValue] = useState(value);
-//   useEffect(
-//     () => {
-//       // Update debounced value after delay
-//       const handler = setTimeout(() => {
-//         setDebouncedValue(value);
-//       }, delay);
-//       // Cancel the timeout if value changes (also on delay change or unmount)
-//       // This is how we prevent debounced value from updating if value is changed ...
-//       // .. within the delay period. Timeout gets cleared and restarted.
-//       return () => {
-//         clearTimeout(handler);
-//       };
-//     },
-//     [value, delay] // Only re-call effect if value or delay changes
-//   );
-//   return debouncedValue;
-// }
 const apicall = (searchval:any)=>
 
 {
-    console.log("nter in apic a")
+    // console.log("nter in apic a")
     const body={
                 username:searchVal
             }
     axios.post(properties.baseURL +properties.searchbyname,body).then((res:any)=>
       {
-        console.log(res.data,"i m red data");
+        // console.log(res.data,"i m red data");
            setstatus({val:"done"});
            const resdata=res.filter((fildata:any)=>
            {
                 return (searchVal && fildata.username.toLowerCase().includes(searchVal.toLowerCase()));
            })
-           console.log(resdata,"i m done data");
+        //    console.log(resdata,"i m done data");
            setResults(res.data.rows);
            setCustomers(res.data.rows);
       }).catch((err)=>

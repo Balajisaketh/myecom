@@ -14,7 +14,7 @@ function Sidebar() {
   return (
    <>
    <div className='bg-white h-screen grid-flow-row border-solid'>
-    <h1 className='text-black text-3xl py-4 font-semibold'>Sri Vashista</h1>
+    <h1 className='text-black text-3xl py-4 font-semibold'>Sri Vasishta</h1>
       <div className='flex mx-5 py-10 px-10 relative'>
 
          <h1>Products</h1>

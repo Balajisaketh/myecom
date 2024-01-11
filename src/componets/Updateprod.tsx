@@ -57,7 +57,7 @@ function Updateprod() {
     setIsModalOpen(false);
   };
   const fetchdata=()=>{
-    axios.get("https://srivasishtaenterprises.com/getproducts").then((res:any)=>{
+    axios.get("https://vasistastore.com/getproducts").then((res:any)=>{
       console.log(res,"i am oroduct get")
       if(res.status==200)
       {
@@ -72,7 +72,7 @@ function Updateprod() {
   }
 
 const deleteprods=(iddataa:any)=>{
-  const url = `https://srivasishtaenterprises.com/deleteproduct/${iddataa}`;
+  const url = `https://vasistastore.com/deleteproduct/${iddataa}`;
   axios.delete(url).then((res)=>{
     if(res.status==200)
     {
@@ -89,7 +89,7 @@ const deleteprods=(iddataa:any)=>{
   
   const updateprod=({price,name}:any)=>{
     console.log("i am entered to update your data",price,name)
-    const url = `https://srivasishtaenterprises.com/updateproduct/${iddata}`;
+    const url = `https://vasistastore.com/updateproduct/${iddata}`;
      // Replace 'products' with your actual API endpoint
   
     const body={
@@ -113,7 +113,7 @@ const deleteprods=(iddataa:any)=>{
  
 
   useEffect(()=>{
-         axios.get("https://srivasishtaenterprises.com/getproducts").then((res:any)=>{
+         axios.get("https://vasistastore.com/getproducts").then((res:any)=>{
           if(res.status==200)
           {
                   console.log("i am rspns",res.data.rows);

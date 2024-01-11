@@ -28,7 +28,7 @@ function Login()
     }
     
 
-      axios.post("https://srivasishtaenterprises.com/api/login",body).then((res:any)=>{
+      axios.post("https://vasistastore.com/api/login",body).then((res:any)=>{
         console.log(res.data,"ui am rpinse")
         const { token, message } = res.data;
         console.log("iam validating",token,message);

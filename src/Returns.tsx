@@ -64,7 +64,7 @@ function Returns() {
       }
     console.log(custId)
     useEffect(() => {
-        axios.get("https://srivasishtaenterprises.com/getreturns").then((res)=>{
+        axios.get("https://vasistastore.com/getreturns").then((res)=>{
             console.log(res.data.message.rows,"i am data from returns");
             setOrders(res.data.message.rows)
 
